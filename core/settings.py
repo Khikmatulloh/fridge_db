@@ -4,6 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from core.jazzmin_conf import JAZZMIN_SETTINGS  # noqa
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 
@@ -41,6 +42,8 @@ EXTERNAL_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     "drf_spectacular_sidecar",
+    "rosetta",
+    "modeltranslation",
 ]
 
 LOCAL_APPS = ["users", "common", "products", "blog", "payments"]
@@ -50,6 +53,7 @@ INSTALLED_APPS = EXTERNAL_APPS + LOCAL_APPS + DJANGO_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",  
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -121,8 +125,19 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
+LANGUAGES = [
+    ('uz', _('Uzbek')),
+    ('en', _('English')),
+    ('ru', _('Russian')),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/

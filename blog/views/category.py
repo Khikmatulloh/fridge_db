@@ -21,16 +21,16 @@ class BlogCategoryDetailView(RetrieveAPIView):
 class BlogCategoryCreateView(CreateAPIView):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 
 class BlogCategoryUpdateView(UpdateAPIView):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 
 class BlogCategoryDeleteView(DestroyAPIView):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]

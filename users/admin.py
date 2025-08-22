@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-
+from modeltranslation.admin import TranslationAdmin
 from users.models import Profession
 
 User = get_user_model()
@@ -74,7 +74,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 @admin.register(Profession)
-class ProfessionAdmin(admin.ModelAdmin):
+class ProfessionAdmin(TranslationAdmin):
     list_display = ["id", "name"]
     list_display_links = ["id", "name"]
     search_fields = ["name"]

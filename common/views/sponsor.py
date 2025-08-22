@@ -21,15 +21,15 @@ class SponsorDetailView(RetrieveAPIView):
 class SponsorCreateView(CreateAPIView):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 class SponsorUpdateView(UpdateAPIView):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 
 class SponsorDeleteView(DestroyAPIView):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]

@@ -22,18 +22,17 @@ class TagDetailView(RetrieveAPIView):
 class TagCreateView(CreateAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
 
 
 class TagUpdateView(UpdateAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
 
 
 class TagDeleteView(DestroyAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-   
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]

@@ -20,15 +20,15 @@ class CommentDetailView(RetrieveAPIView):
 class CommentCreateView(CreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
 
 class CommentUpdateView(UpdateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
 
 
 class CommentDeleteView(DestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]

@@ -21,16 +21,16 @@ class BlogPostDetailView(RetrieveAPIView):
 class BlogPostCreateView(CreateAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
 
 
 class BlogPostUpdateView(UpdateAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
 
 
 class BlogPostDeleteView(DestroyAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]

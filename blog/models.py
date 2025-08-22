@@ -9,24 +9,25 @@ User = get_user_model()
 
 
 class BlogPost(BaseModel):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(unique_for_date="published_at")
-    content = models.TextField()
-    image = models.ImageField(upload_to="blog/", blank=True, null=True)
+    title = models.CharField(_("Title"),max_length=255)
+    slug = models.SlugField(_("Slug"),unique_for_date="published_at")
+    content = models.TextField(_("Content"))
+    image = models.ImageField(_("Image"),upload_to="blog/", blank=True, null=True)
     status = models.CharField(
-        max_length=10, choices=BlogPostStatus.choices, default=BlogPostStatus.DRAFT
+        _("Status"),max_length=10, choices=BlogPostStatus.choices, default=BlogPostStatus.DRAFT
     )
-    is_featured = models.BooleanField(default=False)
-    published_at = models.DateTimeField(blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    is_featured = models.BooleanField(_("Is Featured"),default=False)
+    published_at = models.DateTimeField(_("Published At"), blank=True, null=True)
+    user = models.ForeignKey(User,verbose_name=_("Author"), on_delete=models.CASCADE, related_name="blog_posts")
     category = models.ForeignKey(
         "blog.BlogCategory",
+        verbose_name=_("Category"),
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name="posts",
     )
-    tags = models.ManyToManyField("blog.Tag", blank=True, related_name="posts")
+    tags = models.ManyToManyField("blog.Tag", verbose_name=_("Tags"),blank=True, related_name="posts")
 
     class Meta:
         ordering = ["-published_at"]
@@ -38,7 +39,7 @@ class BlogPost(BaseModel):
 
 
 class BlogCategory(BaseModel):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(_("Name"),max_length=100, unique=True)
     is_active = models.BooleanField(default=True)
 
     class Meta:
@@ -50,7 +51,7 @@ class BlogCategory(BaseModel):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(_("Name"),max_length=50, unique=True)
 
     def __str__(self):
         return self.name
@@ -62,10 +63,10 @@ class Tag(models.Model):
 
 class Comment(BaseModel):
     post = models.ForeignKey(
-        BlogPost, on_delete=models.CASCADE, related_name="comments"
+        BlogPost,verbose_name=_("Post"), on_delete=models.CASCADE, related_name="comments"
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-    text = models.TextField()
+    user = models.ForeignKey(User,verbose_name=_("User"),  on_delete=models.CASCADE, related_name="comments")
+    text = models.TextField(_("Text"))
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
