@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TranslationAdmin
 from blog.models import BlogCategory, BlogPost, Comment, Tag
 
@@ -12,6 +13,48 @@ class BlogPostAdmin(TranslationAdmin):
     search_fields = ("title", "content")
     date_hierarchy = "published_at"
     ordering = ["-published_at"]
+
+    fieldsets = (
+        (
+            _("Main"), {
+                "fields": (
+                    "user",
+                    "slug",
+                    "image",
+                    "status",
+                    "category",
+                    "tags",
+                    "is_featured",
+                    "published_at",
+                ),
+            }
+        ),
+        (
+            _("Uzbek"), {
+                "fields": (
+                    "title_uz",
+                    "content_uz",
+                ),
+            }
+        ),
+        (
+            _("English"), {
+                "fields": (
+                    "title_en",
+                    "content_en",
+                ),
+            }
+        ),
+        (
+            _("Russian"), {
+                "fields": (
+                    "title_ru",
+                    "content_ru",
+                ),
+            }
+        ),
+    )
+    readonly_fields = ("slug", "published_at")
     
 
 
